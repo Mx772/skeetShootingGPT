@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeet Shooting Score Tracker</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      table td, table th {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+      }
+      input[type="number"] {
+        width: 50px;
+      }
+      input[type="text"] {
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Skeet Shooting Score Tracker</h1>
+    <form id="score-form">
+      <label for="station-count">Number of Stations:</label>
+      <input type="number" id="station-count" min="1" max="10" value="1" required>
+      <br>
+      <label for="targets-per-station">Targets per Station:</label>
+      <input type="number" id="targets-per-station" min="1" max="10" value="1" required>
+      <br>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+      <br>
+      <button type="submit">Add Score</button>
+    </form>
+    <table id="score-table">
+      <thead>
+        <tr>
+          <th>Station</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th id="total-score">0</th>
+        </tr>
+      </tfoot>
+    </table>
+    <script>
+      const form = document.getElementById('score-form');
+      const stationCountInput = document.getElementById('station-count');
+      const targetsPerStationInput = document.getElementById('targets-per-station');
+      const nameInput = document.getElementById('name');
+      const scoreTableBody = document.querySelector('#score-table tbody');
+      const totalScoreCell = document.getElementById('total-score');
+      
+      let scores = [];
+      
+      function addScore(event) {
+        event.preventDefault();
+        const stationCount = parseInt(stationCountInput.value);
+        const targetsPerStation = parseInt(targetsPerStationInput.value);
+        const name = nameInput.value;
+        const scoreRow = [name];
+        let totalScore = 0;
+        for (let i = 0; i < stationCount; i++) {
+          let stationScore = '';
+          for (let j = 0; j < targetsPerStation; j++) {
+            const hit = confirm(`Did ${name} hit the target at station ${i+1}, target ${j+1}?`);
+            stationScore += hit ? 'X' : 'O';
+            totalScore += hit ? 1 : 0;
+          }
+          scoreRow.push(stationScore);
+        }
+        scoreRow.push(totalScore);
+        scores.push(scoreRow);
+        updateScoreTable();
+        form.reset();
+      }
+      
+      function updateScoreTable() {
+        scoreTableBody.innerHTML = '';
+        scores.forEach((scoreRow, index) => {1
+          const row = document.createElement('tr');
+          const stationCell = document.createElement('td');
+          stationCell.textContent = index + 1;
+          row.appendChild(stationCell);
+          scoreRow.slice(1, -1)          .forEach((score, index) => {
+            const cell = document.createElement('td');
+            cell.textContent = score;
+            row.appendChild(cell);
+          });
+          const totalScoreCell = document.createElement('td');
+          totalScoreCell.textContent = scoreRow[scoreRow.length - 1];
+          row.appendChild(totalScoreCell);
+          scoreTableBody.appendChild(row);
+        });
+        totalScoreCell.textContent = scores.reduce((sum, scoreRow) => sum + scoreRow[scoreRow.length - 1], 0);
+        setCookie('scores', JSON.stringify(scores), 365);
+      }
+      
+      function getCookie(name) {
+        const cookies = document.cookie.split('; ');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i];
+          const [cookieName, cookieValue] = cookie.split('=');
+          if (cookieName === name) {
+            return JSON.parse(cookieValue);
+          }
+        }
+        return null;
+      }
+      
+      function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = `expires=${date.toUTCString()}`;
+        document.cookie = `${name}=${JSON.stringify(value)};${expires};path=/`;
+      }
+      
+      const storedScores = getCookie('scores');
+      if (storedScores !== null) {
+        scores = storedScores;
+        updateScoreTable();
+      }
+      
+      form.addEventListener('submit', addScore);
+    </script>
+  </body>
+</html>
