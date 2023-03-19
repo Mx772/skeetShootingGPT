@@ -1,136 +1,109 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skeet Shooting Score Tracker</title>
-    <style>
-      table {
-        border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-      table td, table th {
-        border: 1px solid black;
-        padding: 10px;
-        text-align: center;
-      }
-      input[type="number"] {
-        width: 50px;
-      }
-      input[type="text"] {
-        width: 200px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Skeet Shooting Score Tracker</h1>
-    <form id="score-form">
-      <label for="station-count">Number of Stations:</label>
-      <input type="number" id="station-count" min="1" max="10" value="1" required>
-      <br>
-      <label for="targets-per-station">Targets per Station:</label>
-      <input type="number" id="targets-per-station" min="1" max="10" value="1" required>
-      <br>
-      <label for="name">Name:</label>
-      <input type="text" id="name" required>
-      <br>
-      <button type="submit">Add Score</button>
-    </form>
-    <table id="score-table">
-      <thead>
-        <tr>
-          <th>Station</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th>Total</th>
-          <th id="total-score">0</th>
-        </tr>
-      </tfoot>
-    </table>
-    <script>
-      const form = document.getElementById('score-form');
-      const stationCountInput = document.getElementById('station-count');
-      const targetsPerStationInput = document.getElementById('targets-per-station');
-      const nameInput = document.getElementById('name');
-      const scoreTableBody = document.querySelector('#score-table tbody');
-      const totalScoreCell = document.getElementById('total-score');
-      
-      let scores = [];
-      
-      function addScore(event) {
-        event.preventDefault();
-        const stationCount = parseInt(stationCountInput.value);
-        const targetsPerStation = parseInt(targetsPerStationInput.value);
-        const name = nameInput.value;
-        const scoreRow = [name];
-        let totalScore = 0;
-        for (let i = 0; i < stationCount; i++) {
-          let stationScore = '';
-          for (let j = 0; j < targetsPerStation; j++) {
-            const hit = confirm(`Did ${name} hit the target at station ${i+1}, target ${j+1}?`);
-            stationScore += hit ? 'X' : 'O';
-            totalScore += hit ? 1 : 0;
-          }
-          scoreRow.push(stationScore);
-        }
-        scoreRow.push(totalScore);
-        scores.push(scoreRow);
-        updateScoreTable();
-        form.reset();
-      }
-      
-      function updateScoreTable() {
-        scoreTableBody.innerHTML = '';
-        scores.forEach((scoreRow, index) => {1
-          const row = document.createElement('tr');
-          const stationCell = document.createElement('td');
-          stationCell.textContent = index + 1;
-          row.appendChild(stationCell);
-          scoreRow.slice(1, -1)          .forEach((score, index) => {
-            const cell = document.createElement('td');
-            cell.textContent = score;
-            row.appendChild(cell);
-          });
-          const totalScoreCell = document.createElement('td');
-          totalScoreCell.textContent = scoreRow[scoreRow.length - 1];
-          row.appendChild(totalScoreCell);
-          scoreTableBody.appendChild(row);
-        });
-        totalScoreCell.textContent = scores.reduce((sum, scoreRow) => sum + scoreRow[scoreRow.length - 1], 0);
-        setCookie('scores', JSON.stringify(scores), 365);
-      }
-      
-      function getCookie(name) {
-        const cookies = document.cookie.split('; ');
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i];
-          const [cookieName, cookieValue] = cookie.split('=');
-          if (cookieName === name) {
-            return JSON.parse(cookieValue);
-          }
-        }
-        return null;
-      }
-      
-      function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        const expires = `expires=${date.toUTCString()}`;
-        document.cookie = `${name}=${JSON.stringify(value)};${expires};path=/`;
-      }
-      
-      const storedScores = getCookie('scores');
-      if (storedScores !== null) {
-        scores = storedScores;
-        updateScoreTable();
-      }
-      
-      form.addEventListener('submit', addScore);
-    </script>
-  </body>
+
+<head>
+	<meta charset="utf-8">
+	<title>Skeet Shooting Scorekeeper</title>
+</head>
+
+<body>
+	<h1>Skeet Shooting Scorekeeper</h1>
+	<form id="player-form">
+		<label for="num-players">Number of players:</label>
+		<input type="number" id="num-players" name="num-players" min="1" value="1">
+		<button type="submit">Add Players</button>
+	</form>
+	<div id="score-table-container"></div>
+	<script>
+		let players = [];
+		let scores = [];
+
+		const playerForm = document.getElementById('player-form');
+		playerForm.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const numPlayers = parseInt(document.getElementById('num-players').value);
+			players = [];
+			for (let i = 1; i <= numPlayers; i++) {
+				const playerName = prompt(`Enter name of player ${i}:`);
+				if (playerName !== null && playerName !== '') {
+					players.push(playerName);
+				} else {
+					i--;
+				}
+			}
+			scores = Array.from({
+				length: numPlayers
+			}, () => []);
+			updateScoreTable();
+		});
+
+		function updateScoreTable() {
+			const scoreTableContainer = document.getElementById('score-table-container');
+			scoreTableContainer.innerHTML = '';
+			if (players.length === 0) {
+				return;
+			}
+			const scoreTable = document.createElement('table');
+			const scoreTableHead = document.createElement('thead');
+			const scoreTableBody = document.createElement('tbody');
+			const headerRow = document.createElement('tr');
+			const playerNameHeader = document.createElement('th');
+			playerNameHeader.textContent = 'Player';
+			headerRow.appendChild(playerNameHeader);
+			for (let i = 1; i <= 8; i++) {
+				const stationHeader = document.createElement('th');
+				stationHeader.textContent = `Station ${i}`;
+				headerRow.appendChild(stationHeader);
+			}
+			const totalScoreHeader = document.createElement('th');
+			totalScoreHeader.textContent = 'Total';
+			headerRow.appendChild(totalScoreHeader);
+			scoreTableHead.appendChild(headerRow);
+			scoreTable.appendChild(scoreTableHead);
+			scoreTable.appendChild(scoreTableBody);
+			scores.forEach((scoreRow, playerIndex) => {
+				const row = document.createElement('tr');
+				const playerNameCell = document.createElement('td');
+				playerNameCell.textContent = players[playerIndex];
+				row.appendChild(playerNameCell);
+				scoreRow.forEach((score, stationIndex) => {
+					const cell = document.createElement('td');
+					const target = document.createElement('button');
+					target.textContent = score === 1 ? 'X' : 'O';
+					target.addEventListener('click', () => {
+						scores[playerIndex][stationIndex] = 1 - scores[playerIndex][stationIndex];
+						updateScoreTable();
+					});
+					cell.appendChild(target);
+					row.appendChild(cell);
+				});
+				const totalScoreCell = document.createElement('td');
+				totalScoreCell.textContent = scoreRow.reduce((sum, score) => sum + score, 0);
+				row.appendChild(totalScoreCell);
+				scoreTableBody.appendChild(row);
+			});
+			const totalsRow = document.createElement('tr');
+			const totalsLabelCell = document.createElement('td');
+			totalsLabelCell.textContent = 'Totals';
+			totalsRow.appendChild(totalsLabelCell);
+			let totalScores = Array.from({
+				length: 9
+			}, () => 0);
+			scores.forEach(scoreRow => {
+				scoreRow.forEach((score, stationIndex) => {
+					totalScores[stationIndex] += score;
+				});
+				totalScores[8] += scoreRow.reduce((sum, score) => sum + score, 0);
+			})(scoreRow);
+			for (let i = 0; i < 9; i++) {
+				const totalsCell = document.createElement('td');
+				totalsCell.textContent = totalScores[i];
+				totalsRow.appendChild(totalsCell);
+			}
+			scoreTableBody.appendChild(totalsRow);
+			scoreTableContainer.appendChild(scoreTable);
+		}
+	</script>
+</body>
+
 </html>
