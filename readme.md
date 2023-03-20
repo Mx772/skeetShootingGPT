@@ -37,12 +37,12 @@ Or as Chat GPT said it:
 
 # **Attempt 1**:
 
-## Prompt 1:
+### Prompt 1:
 ```
 do you know what skeet shooting is, and how it is scored?
 ```
 
-## Response:
+### Response:
 ```
 Yes, I am familiar with skeet shooting!
 
@@ -60,7 +60,7 @@ Notes:
 
 ---
 
-## Prompt 2:
+### Prompt 2:
 ```
 Great! Can you write me some code for a simple web application that does the following:
 - Lets the user input the amount of station, with how many targets at each station. 
@@ -73,16 +73,16 @@ Great! Can you write me some code for a simple web application that does the fol
 - Uses cookies to store the information incase the user refreshes the site. 
 ```
 
-## Response:
+### Response:
 
 [v1](https://github.com/Mx772/skeetShootingGPT/commit/22648f7d667689c4ed78712084bc827e6df21dcc)
 
 Notes:
-> Not bad. However, it doesn't *quite* work as you'd expect. As you can see in the code, it will browser-## Prompt you with a name, then 'Did Name1 hit Station 1, Target 1' ... until it goes through all iterations. This is not really how it'd work in the real world as you go back and forth between Shooter 1 and Shooter 2. Lets try and explain that.
+> Not bad. However, it doesn't *quite* work as you'd expect. As you can see in the code, it will browser-### Prompt you with a name, then 'Did Name1 hit Station 1, Target 1' ... until it goes through all iterations. This is not really how it'd work in the real world as you go back and forth between Shooter 1 and Shooter 2. Lets try and explain that.
 
 ---
 
-## Prompt 3:
+### Prompt 3:
 ```
 Can you make it so that you can add the players first (usually more than 1 player). 
 Then generate and display the table. 
@@ -92,7 +92,7 @@ Then users can click on each target in the station to mark if they hit it or not
 
 I probably could've worded this better, and the resulting code is likely my fault by pushing it more towards the *player* being the issue. 
 
-## Response:
+### Response:
 [V2](https://github.com/Mx772/skeetShootingGPT/commit/f96d15b5aa9f4f56dc12e13491536abb205687d9)
 
 Notes:
@@ -100,13 +100,13 @@ Notes:
 
 ---
 
-## Prompt 4:
+### Prompt 4:
 ```
 Looks like that doesn't work. 
 After putting the name of the player in, nothing happens. 
 ```
 
-## Response:
+### Response:
 [v3](https://github.com/Mx772/skeetShootingGPT/commit/57071f7b44e5c766e9e3eff5752eeac1316260a7)
 
 Notes:
@@ -115,13 +115,13 @@ Notes:
 ---
 
 
-## Prompt 5:
+### Prompt 5:
 ```
 Looks like it's still hitting the same issue. How about we start at the beginning. 
 Do you know what a skeet scorecard looks like? 
 ```
 
-## Response:
+### Response:
 ```
 Yes, a skeet scorecard typically includes the following information:
 
@@ -165,14 +165,14 @@ Notes:
 ---
 
 
-## Prompt 6:
+### Prompt 6:
 ```
 Great. Can you write code for a website that will allow players to keep track of their scores on their phone that resembles the above scorecard? 
 
 Allow it to be interactable, and let is use cookies so that all information isn't destroyed when refreshing. 
 ```
 
-## Response:
+### Response:
 [v4](https://github.com/Mx772/skeetShootingGPT/commit/aec211881995057272836f5e2feb5999d73baaf8)
 
 Notes:
@@ -181,24 +181,24 @@ Asking it to continue keeps giving me 'This is the complete code' and doesn't fi
 
 ---
 
-## Prompt 7:
+### Prompt 7:
 ```
 Please give me complete code. 
 ```
 
-## Response:
+### Response:
 Errors. It would write a bit, then not finish it. When asked to continue it'd start from the beginning of the html file no matter how much Coaxing. 
 I think it's history of the conversation is breaking it honestly. Lets restart. 
 
 # **Attempt 2**:
 
-## Prompt:
+### Prompt:
 ```
 Do you know what a skeet scorecard looks like? 
 Such as when it has multiple players and stations with generally 2 targets per station?
 ```
 
-## Response:
+### Response:
 ```
 Yes, I am familiar with skeet scorecards used in the sport of skeet shooting.
 
@@ -214,12 +214,12 @@ If there are multiple shooters on the scorecard, their scores will be listed in 
 ---
 
 
-## Prompt 2:
+### Prompt 2:
 ```
 could you give me an example in ascii art
 ```
 
-## Response:
+### Response:
 ```
 +--------+---+---+---+---+---+---+---+---+
 | Shooter| 1H| 1L| 2H| 2L| 3H| 3L| 4H| 4L|
@@ -239,18 +239,18 @@ could you give me an example in ascii art
 
 ---
 
-## Prompt 3:
+### Prompt 3:
 ```
 That's fantastic. 
 
 Could you write this into code for a simple web application using html, css, and javascript. 
 
-Note, as an application, you have a character limit per ## Response. 
+Note, as an application, you have a character limit per ### Response. 
 Can you make it so that you can write all of the code starting where you left off writing when I ask to continue?
 
 ```
 
-## Response:
+### Response:
 [v2.0](https://github.com/Mx772/skeetShootingGPT/commit/10721b29f927697e845ce97a883e080da5f787dc)
 
 Notes:
@@ -260,14 +260,14 @@ Lets see if we can fix that.
 ---
 
 
-## Prompt 4:
+### Prompt 4:
 ```
 Awesome!
 Can you make it so that the user can customize the names, and how many stations? 
 Also can you allow the javascript to count 'X' as 1?
 ```
 
-## Response
+### Response
 [v2.1](https://github.com/Mx772/skeetShootingGPT/commit/8a8baeb63ba8c970c95fb273ec8729affee8aa26)
 
 Notes:
@@ -277,7 +277,7 @@ Notes:
 ---
 
 
-## Prompt 5:
+### Prompt 5:
 ```
 Very Close!
 Looks like the total is the name of the first column, when it should be the last one. 
@@ -291,6 +291,7 @@ Thank you!
 ```
 
 Reponse:
+
 [v2.2](https://github.com/Mx772/skeetShootingGPT/commit/1d0cfe62fa25c3594315410a10bafdc5551b9fc3)
 
 
@@ -300,13 +301,13 @@ Notes:
 ---
 
 
-## Prompt 6:
+### Prompt 6:
 ```
 Using this code you just wrote, can you make it so that I can then edit the table it generates to add in scores (case insensitive 'X') 
 Then total that in the total column. 
 ```
 
-## Response:
+### Response:
 [v2.3](https://github.com/Mx772/skeetShootingGPT/commit/e58215981bbdb9586677e1f6949bb602247c379f)
 
 Notes:
@@ -316,7 +317,7 @@ For giggles I tell it what's wrong.
 ---
 
 
-## Prompt 7:
+### Prompt 7:
 ```
 This is super close! Great job!
 The only thing that doesn't work is the scoring. 
@@ -325,7 +326,7 @@ It looks like it only goes up to a max of 8. It also doesn't auto-update. It sho
 it needs to add up both targets for each station, and display a number as soon you put any Xs in. 
 ```
 
-## Response
+### Response
 [v2.4](https://github.com/Mx772/skeetShootingGPT/commit/ac7622254eed391e86352b5348e99f31d8bff973)
 
 Notes:
@@ -334,10 +335,10 @@ And this code still doesn't work, and its fix is really strange. But it's easy e
 
 # Summary:
 I still see this is a great coding tool for developers, but not a replacement...yet. But it's getting closer and closer. 
-At most ## Responses, you could take what it wrote in under a minute, and complete it and have a running concept in under 5 minutes. It really helps to possibly touch on functions you may have forgot about.
+At most ### Responses, you could take what it wrote in under a minute, and complete it and have a running concept in under 5 minutes. It really helps to possibly touch on functions you may have forgot about.
 If you know the right 'keywords' it's looking for, you can probably coax better answers out of it. 
 
 But the end result is pretty great if you don't know how to code, or even if you just want to slap a quick proof of concept of some site together. 
 
 It took a total of 15 minutes to throw this together, which if I was still super profecient at HTML/JS it'd probably take me about the same. 
-This is also using the March 14 Free Version of ChatGPT. Having access to the full/Plus version may result in better/longer ## Responses. 
+This is also using the March 14 Free Version of ChatGPT. Having access to the full/Plus version may result in better/longer ### Responses. 
