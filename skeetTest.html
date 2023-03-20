@@ -1,32 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Skeet Scorecard</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: lightgray;
+      }
+    </style>
   </head>
   <body>
     <h1>Skeet Scorecard</h1>
-    <div>
-      <label for="num-stations">Number of Stations:</label>
-      <input type="number" id="num-stations" value="2">
-    </div>
-    <div id="shooter-names">
-      <label for="num-shooters">Number of Shooters:</label>
-      <input type="number" id="num-shooters" value="4">
-      <button id="add-shooter">Add Shooter</button>
-    </div>
-    <table id="scorecard">
-      <thead>
-        <tr>
-          <th>Shooter</th>
-          <th>Station 1</th>
-          <th>Station 2</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-    <script src="script.js"></script>
+    <label for="numShooters">Number of Shooters:</label>
+    <input type="number" id="numShooters" min="1" max="10" value="1" />
+    <label for="numStations">Number of Stations:</label>
+    <input type="number" id="numStations" min="1" max="10" value="5" />
+    <button onclick="generateScorecard()">Generate Scorecard</button>
+    <br /><br />
+    <div id="scorecard"></div>
+    <script>
+      function generateScorecard() {
+        const numShooters = document.getElementById("numShooters").value;
+        const numStations = document.getElementById("numStations").value;
+
+        const scorecard = document.createElement("table");
+        const headerRow = scorecard.insertRow();
+        headerRow.insertCell().textContent = "Shooter";
+        for (let i = 1; i <= numStations; i++) {
+          headerRow.insertCell().textContent = `Station ${i} - T1`;
+          headerRow.insertCell().textContent = `Station ${i} - T2`;
+        }
+        headerRow.insertCell().textContent = "Total";
+
+        for (let i = 1; i <= numShooters; i++) {
+          const shooterRow = scorecard.insertRow();
+          const shooterName = prompt(`Enter name for shooter ${i}:`);
+          shooterRow.insertCell().textContent = shooterName;
+          for (let j = 1; j <= numStations * 2; j++) {
+            shooterRow.insertCell();
+          }
+          shooterRow.insertCell();
+        }
+
+        document.getElementById("scorecard").appendChild(scorecard);
+      }
+
+      function updateScores() {
+        const scorecard = document.querySelector("table");
+        for (let i = 1; i < scorecard.rows.length; i++) {
+          const shooterRow = scorecard.rows[i];
+          let total = 0;
+          for (let j = 1; j < shooterRow.cells.length - 1; j += 2) {
+            const target1 = shooterRow.cells[j].textContent.trim();
+            const target2 = shooterRow.cells[j + 1].textContent.trim();
+            if (target1.toLowerCase() === "x" || target2.toLowerCase() === "x") {
+              total++;
+            } else if (!isNaN(target1) && !isNaN(target2)) {
+              total += parseInt(target1) + parseInt(target2);
+            }
+          }
+          shooterRow.cells[shooterRow.cells.length - 1].textContent = total;
+        }
+      }
+
+      const scorecardDiv = document.getElementById("scorecard");
+      scorecardDiv.addEventListener("input", updateScores);
+    </script>
   </body>
 </html>
