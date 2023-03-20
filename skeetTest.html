@@ -3,105 +3,103 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Skeet Shooting Scorekeeper</title>
+	<title>Skeet Shooting Scorecard</title>
 </head>
 
 <body>
-	<h1>Skeet Shooting Scorekeeper</h1>
+	<h1>Skeet Shooting Scorecard</h1>
 	<form id="player-form">
-		<label for="num-players">Number of players:</label>
-		<input type="number" id="num-players" name="num-players" min="1" value="1">
-		<button type="submit">Add Players</button>
+		<label for="num-players">Number of Players:</label>
+		<input type="number" id="num-players" min="1" value="1">
+		<button type="submit">Start Game</button>
 	</form>
 	<div id="score-table-container"></div>
 	<script>
-		let players = [];
-		let scores = [];
+		const players = [];
+		const scores = [];
+		let numPlayers = 0;
+		let numTargets = 0;
 
 		const playerForm = document.getElementById('player-form');
-		playerForm.addEventListener('submit', (event) => {
+		playerForm.addEventListener('submit', event => {
 			event.preventDefault();
-			const numPlayers = parseInt(document.getElementById('num-players').value);
-			players = [];
-			for (let i = 1; i <= numPlayers; i++) {
-				const playerName = prompt(`Enter name of player ${i}:`);
-				if (playerName !== null && playerName !== '') {
-					players.push(playerName);
-				} else {
-					i--;
-				}
+			numPlayers = parseInt(document.getElementById('num-players').value);
+			const playerTable = document.createElement('table');
+			const headerRow = document.createElement('tr');
+			const scoreTable = document.createElement('table');
+			const scoreTableBody = document.createElement('tbody');
+			const scoreTableHeader = document.createElement('thead');
+			const scoreTableHeaderRow = document.createElement('tr');
+			const scoreTableHeaderBlankCell = document.createElement('td');
+			scoreTableHeaderBlankCell.textContent = '';
+			scoreTableHeaderRow.appendChild(scoreTableHeaderBlankCell);
+			for (let i = 1; i <= numTargets; i++) {
+				const targetHeaderCell = document.createElement('td');
+				targetHeaderCell.textContent = i;
+				scoreTableHeaderRow.appendChild(targetHeaderCell);
 			}
-			scores = Array.from({
-				length: numPlayers
-			}, () => []);
-			updateScoreTable();
-		});
-
-		function updateScoreTable() {
+			scoreTableHeader.appendChild(scoreTableHeaderRow);
+			scoreTable.appendChild(scoreTableHeader);
 			const scoreTableContainer = document.getElementById('score-table-container');
 			scoreTableContainer.innerHTML = '';
-			if (players.length === 0) {
-				return;
-			}
-			const scoreTable = document.createElement('table');
-			const scoreTableHead = document.createElement('thead');
-			const scoreTableBody = document.createElement('tbody');
-			const headerRow = document.createElement('tr');
-			const playerNameHeader = document.createElement('th');
-			playerNameHeader.textContent = 'Player';
-			headerRow.appendChild(playerNameHeader);
-			for (let i = 1; i <= 8; i++) {
-				const stationHeader = document.createElement('th');
-				stationHeader.textContent = `Station ${i}`;
-				headerRow.appendChild(stationHeader);
-			}
-			const totalScoreHeader = document.createElement('th');
-			totalScoreHeader.textContent = 'Total';
-			headerRow.appendChild(totalScoreHeader);
-			scoreTableHead.appendChild(headerRow);
-			scoreTable.appendChild(scoreTableHead);
-			scoreTable.appendChild(scoreTableBody);
-			scores.forEach((scoreRow, playerIndex) => {
-				const row = document.createElement('tr');
-				const playerNameCell = document.createElement('td');
-				playerNameCell.textContent = players[playerIndex];
-				row.appendChild(playerNameCell);
-				scoreRow.forEach((score, stationIndex) => {
-					const cell = document.createElement('td');
-					const target = document.createElement('button');
-					target.textContent = score === 1 ? 'X' : 'O';
-					target.addEventListener('click', () => {
-						scores[playerIndex][stationIndex] = 1 - scores[playerIndex][stationIndex];
+			scoreTableContainer.appendChild(scoreTable);
+			for (let i = 1; i <= numPlayers; i++) {
+				const playerInput = prompt(`Enter player ${i} name:`);
+				players.push(playerInput);
+				const scoreRow = [];
+				const playerRow = document.createElement('tr');
+				const playerCell = document.createElement('td');
+				playerCell.textContent = playerInput;
+				playerRow.appendChild(playerCell);
+				for (let j = 1; j <= numTargets; j++) {
+					const scoreCell = document.createElement('td');
+					const scoreButton = document.createElement('button');
+					scoreButton.textContent = 'O';
+					scoreButton.addEventListener('click', () => {
+						scoreButton.textContent = 'X';
+						scoreRow[j - 1] = 1;
 						updateScoreTable();
 					});
-					cell.appendChild(target);
-					row.appendChild(cell);
-				});
-				const totalScoreCell = document.createElement('td');
-				totalScoreCell.textContent = scoreRow.reduce((sum, score) => sum + score, 0);
-				row.appendChild(totalScoreCell);
-				scoreTableBody.appendChild(row);
-			});
+					scoreCell.appendChild(scoreButton);
+					playerRow.appendChild(scoreCell);
+				}
+				scores.push(scoreRow);
+				scoreTableBody.appendChild(playerRow);
+			}
 			const totalsRow = document.createElement('tr');
-			const totalsLabelCell = document.createElement('td');
-			totalsLabelCell.textContent = 'Totals';
-			totalsRow.appendChild(totalsLabelCell);
-			let totalScores = Array.from({
-				length: 9
-			}, () => 0);
-			scores.forEach(scoreRow => {
+			const totalsRowHeaderCell = document.createElement('td');
+			totalsRowHeaderCell.textContent = 'Totals';
+			totalsRow.appendChild(totalsRowHeaderCell);
+			const totalScores = Array(numTargets + 1).fill(0);
+			(scoreRow => {
 				scoreRow.forEach((score, stationIndex) => {
-					totalScores[stationIndex] += score;
+					totalScores[stationIndex + 1] += score;
 				});
-				totalScores[8] += scoreRow.reduce((sum, score) => sum + score, 0);
+				totalScores[0] += scoreRow.reduce((sum, score) => sum + score, 0);
 			})(scoreRow);
-			for (let i = 0; i < 9; i++) {
+			for (let i = 0; i <= numTargets; i++) {
 				const totalsCell = document.createElement('td');
 				totalsCell.textContent = totalScores[i];
 				totalsRow.appendChild(totalsCell);
 			}
 			scoreTableBody.appendChild(totalsRow);
-			scoreTableContainer.appendChild(scoreTable);
+			scoreTable.appendChild(scoreTableBody);
+		});
+
+		function updateScoreTable() {
+			const scoreTable = document.querySelector('table tbody');
+			const totalScores = Array(numTargets + 1).fill(0);
+			scores.forEach((scoreRow, playerIndex) => {
+				scoreRow.forEach((score, stationIndex) => {
+					totalScores[stationIndex + 1] += score;
+					scoreTable.rows[playerIndex + 1].cells[stationIndex + 1].textContent = score ? 'X' : 'O';
+				});
+				totalScores[0] += scoreRow.reduce((sum, score) => sum + score, 0);
+			});
+			const totalsRow = scoreTable.rows[scores.length + 1];
+			for (let i = 0; i <= numTargets; i++) {
+				totalsRow.cells[i].textContent = totalScores[i];
+			}
 		}
 	</script>
 </body>
