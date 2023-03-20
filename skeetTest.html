@@ -1,63 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
     <title>Skeet Scorecard</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <h1>Skeet Scorecard</h1>
+    <div>
+      <label for="num-stations">Number of Stations:</label>
+      <input type="number" id="num-stations" value="2">
+    </div>
+    <div id="shooter-names">
+      <label for="num-shooters">Number of Shooters:</label>
+      <input type="number" id="num-shooters" value="4">
+      <button id="add-shooter">Add Shooter</button>
+    </div>
     <table id="scorecard">
       <thead>
         <tr>
           <th>Shooter</th>
-          <th>1H</th>
-          <th>1L</th>
-          <th>2H</th>
-          <th>2L</th>
-          <th>3H</th>
-          <th>3L</th>
-          <th>4H</th>
-          <th>4L</th>
+          <th>Station 1</th>
+          <th>Station 2</th>
           <th>Total</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td contenteditable="true">Player 1</td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td contenteditable="true">Player 2</td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td contenteditable="true">Player 3</td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td></td>
-        </tr>
       </tbody>
     </table>
     <script src="script.js"></script>
