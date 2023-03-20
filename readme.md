@@ -273,6 +273,8 @@ Also can you allow the javascript to count 'X' as 1?
 Notes:
 > Super close. Lets see what we can do with this. 
 
+![image](https://user-images.githubusercontent.com/9059161/226224986-dabcff1a-94d4-4389-99fa-aaea26b6fcd0.png)
+
 
 ---
 
@@ -332,6 +334,8 @@ it needs to add up both targets for each station, and display a number as soon y
 Notes:
 > I had to regenerate this one several times, this is the closest I got. It would keep trying to regen the html completely, or given broken code. 
 And this code still doesn't work, and its fix is really strange. But it's easy enough to fix that I call it here. 
+
+![image](https://user-images.githubusercontent.com/9059161/226225017-f138d256-6a87-4bf4-bba6-dc110c491023.png)
 
 # Summary:
 I still see this is a great coding tool for developers, but not a replacement...yet. But it's getting closer and closer. 
