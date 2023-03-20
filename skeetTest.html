@@ -1,38 +1,65 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Skeet Scorecard</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<style>
-		table {
-			font-size: 1.2em;
-		}
-	</style>
-</head>
-<body>
-	<div class="container">
-		<h2>Skeet Scorecard</h2>
-		<form>
-			<div class="form-group">
-				<label for="name">Player Name:</label>
-				<input type="text" class="form-control" id="name" name="name" required>
-			</div>
-			<div class="form-group">
-				<label for="num_stations">Number of Stations:</label>
-				<input type="number" class="form-control" id="num_stations" name="num_stations" min="1" max="8" required>
-			</div>
-			<div class="form-group">
-				<label for="targets">Targets at Each Station:</label>
-				<input type="number" class="form-control" id="targets" name="targets" min="1" max="25" required>
-			</div>
-			<button type="submit" class="btn btn-primary">Start</button>
-		</form>
-		<div id="scorecard"></div>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="scorecard.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Skeet Scorecard</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <table id="scorecard">
+      <thead>
+        <tr>
+          <th>Shooter</th>
+          <th>1H</th>
+          <th>1L</th>
+          <th>2H</th>
+          <th>2L</th>
+          <th>3H</th>
+          <th>3L</th>
+          <th>4H</th>
+          <th>4L</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td contenteditable="true">Player 1</td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td contenteditable="true">Player 2</td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td contenteditable="true">Player 3</td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <script src="script.js"></script>
+  </body>
 </html>
