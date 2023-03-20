@@ -335,10 +335,11 @@ And this code still doesn't work, and its fix is really strange. But it's easy e
 
 # Summary:
 I still see this is a great coding tool for developers, but not a replacement...yet. But it's getting closer and closer. 
-At most ### Responses, you could take what it wrote in under a minute, and complete it and have a running concept in under 5 minutes. It really helps to possibly touch on functions you may have forgot about.
+
+After most responses, you could take what it wrote in under a minute, and complete it and have a running concept in under 5 minutes. It really helps to possibly touch on functions you may have forgot about.
 If you know the right 'keywords' it's looking for, you can probably coax better answers out of it. 
 
 But the end result is pretty great if you don't know how to code, or even if you just want to slap a quick proof of concept of some site together. 
 
 It took a total of 15 minutes to throw this together, which if I was still super profecient at HTML/JS it'd probably take me about the same. 
-This is also using the March 14 Free Version of ChatGPT. Having access to the full/Plus version may result in better/longer ### Responses. 
+This is also using the March 14 Free Version of ChatGPT. Having access to the full/Plus version may result in better/longer responses. 
