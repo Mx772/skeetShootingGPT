@@ -97,20 +97,33 @@
 		function updateScores() {
 			const scorecard = document.querySelector("table");
 			for (let i = 1; i < scorecard.rows.length; i++) {
-				const shooterRow = scorecard.rows[i];
-				let total = 0;
-				for (let j = 1; j < shooterRow.cells.length - 1; j += 2) {
-					const target1 = shooterRow.cells[j].textContent.trim();
-					const target2 = shooterRow.cells[j + 1].textContent.trim();
-					if (target1.toLowerCase() === "x" || target2.toLowerCase() === "x") {
-						total++;
-					} else if (!isNaN(target1) && !isNaN(target2)) {
-						total += parseInt(target1) + parseInt(target2);
-					}
+			  const shooterRow = scorecard.rows[i];
+			  let total = 0;
+			  let allScoresEntered = true;
+			  for (let j = 1; j < shooterRow.cells.length - 1; j += 2) {
+				const target1 = shooterRow.cells[j].textContent.trim();
+				const target2 = shooterRow.cells[j + 1].textContent.trim();
+				let score1 = parseInt(target1);
+				let score2 = parseInt(target2);
+				if (target1.toLowerCase() === "x") {
+				  score1 = 1;
 				}
+				if (target2.toLowerCase() === "x") {
+				  score2 = 1;
+				}
+				if (isNaN(score1) || isNaN(score2)) {
+				  allScoresEntered = false;
+				  break;
+				}
+				total += score1 + score2;
+			  }
+			  if (allScoresEntered) {
 				shooterRow.cells[shooterRow.cells.length - 1].textContent = total;
+			  } else {
+				shooterRow.cells[shooterRow.cells.length - 1].textContent = " ";
+			  }
 			}
-		}
+		  }
 	</script>
 </body>
 
