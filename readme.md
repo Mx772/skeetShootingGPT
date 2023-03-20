@@ -75,7 +75,7 @@ Great! Can you write me some code for a simple web application that does the fol
 
 ## Response:
 
-v1
+[v1](https://github.com/Mx772/skeetShootingGPT/commit/22648f7d667689c4ed78712084bc827e6df21dcc)
 
 Notes:
 > Not bad. However, it doesn't *quite* work as you'd expect. As you can see in the code, it will browser-## Prompt you with a name, then 'Did Name1 hit Station 1, Target 1' ... until it goes through all iterations. This is not really how it'd work in the real world as you go back and forth between Shooter 1 and Shooter 2. Lets try and explain that.
@@ -93,7 +93,7 @@ Then users can click on each target in the station to mark if they hit it or not
 I probably could've worded this better, and the resulting code is likely my fault by pushing it more towards the *player* being the issue. 
 
 ## Response:
-V2
+[V2](https://github.com/Mx772/skeetShootingGPT/commit/f96d15b5aa9f4f56dc12e13491536abb205687d9)
 
 Notes:
 > Obviously still no there yet, it doesn't quite work as it'll just ask for names then do nothing. Lets try again. I've seen other users use 'This error is thrown' or 'This doesn't work, this is happening'. Lets try that.
@@ -107,7 +107,7 @@ After putting the name of the player in, nothing happens.
 ```
 
 ## Response:
-Doesn't Fix/Change 
+[v3](https://github.com/Mx772/skeetShootingGPT/commit/57071f7b44e5c766e9e3eff5752eeac1316260a7)
 
 Notes:
 > I think I've lead it down the wrong path. At this point, lets try and restart. The code isn't horrible, but I don't think it knows how to actually fix the issue here. 
@@ -173,7 +173,7 @@ Allow it to be interactable, and let is use cookies so that all information isn'
 ```
 
 ## Response:
-v4
+[v4](https://github.com/Mx772/skeetShootingGPT/commit/aec211881995057272836f5e2feb5999d73baaf8)
 
 Notes:
 > At this point, it got stuck. It's first iteration gave me a HTML and JS script. This also doesn't quite work like it thinks it does. It also gave me an incomplete JS code. (I added only brackets and such to get it to run.)
@@ -251,7 +251,7 @@ Can you make it so that you can write all of the code starting where you left of
 ```
 
 ## Response:
-v2.0
+[v2.0](https://github.com/Mx772/skeetShootingGPT/commit/10721b29f927697e845ce97a883e080da5f787dc)
 
 Notes:
 > This actually works. But you have to enter `1`/ An Int to get the counting to work. 
@@ -268,7 +268,7 @@ Also can you allow the javascript to count 'X' as 1?
 ```
 
 ## Response
-v2.1
+[v2.1](https://github.com/Mx772/skeetShootingGPT/commit/8a8baeb63ba8c970c95fb273ec8729affee8aa26)
 
 Notes:
 > Super close. Lets see what we can do with this. 
@@ -291,7 +291,7 @@ Thank you!
 ```
 
 Reponse:
-v2.2
+[v2.2](https://github.com/Mx772/skeetShootingGPT/commit/1d0cfe62fa25c3594315410a10bafdc5551b9fc3)
 
 
 Notes:
@@ -307,7 +307,7 @@ Then total that in the total column.
 ```
 
 ## Response:
-v2.3
+[v2.3](https://github.com/Mx772/skeetShootingGPT/commit/e58215981bbdb9586677e1f6949bb602247c379f)
 
 Notes:
 > At this point, I basically say it has it. All that's not working is the scoring which is due to a bit of wrong code. I think dropping the cookie requirement (Which it really didn't get anyway) helped a bit. 
@@ -326,7 +326,7 @@ it needs to add up both targets for each station, and display a number as soon y
 ```
 
 ## Response
-v2.4
+[v2.4](https://github.com/Mx772/skeetShootingGPT/commit/ac7622254eed391e86352b5348e99f31d8bff973)
 
 Notes:
 > I had to regenerate this one several times, this is the closest I got. It would keep trying to regen the html completely, or given broken code. 
